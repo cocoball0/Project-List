@@ -1,0 +1,117 @@
+﻿<!DOCTYPE html>
+<html lang="ko">
+
+<style>
+    /* 전체 스타일 설정 */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+    }
+
+    body {
+		background-image: url('image/우승순간.jpg');
+        background-size: cover;
+        background-repeat: no-repeat;
+        background-attachment: fixed; /* 스크롤 시 배경 고정 여부 설정 */
+    }
+
+    /* 헤더 스타일 */
+    header {
+        background-color: white;
+        color: black;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    /* 메인 내용 스타일 */
+    .team-intro {
+        padding: 2rem;
+    }
+
+    /* 푸터 스타일 */
+    footer {
+        background-color: white;
+        color: #fff;
+        text-align: center;
+        padding: 1rem 0;
+    }
+
+    table {
+        border-collapse: collapse;
+        margin: 0 auto; /* 수평 가운데 정렬 */
+    }
+
+    td {
+        border: 1px solid #000;
+        padding: 10px;
+        font-size: 20px; /* 글자 크기 조절 */
+        font-family: Arial, sans-serif; /* 원하는 글꼴로 변경 */
+        font-weight: bold; /* 글자 굵게 만들기 */
+        color: #333; /* 글자 색상 변경 */
+        background-color: #fff;
+    }
+
+    .team-logo {
+        max-width: 100px;
+        height: auto;
+    }
+    /* 표 안의 텍스트 가운데 정렬 */
+    table {
+        text-align: center;
+    }
+
+    /* 팀 이름 가운데 정렬 */
+    .team-name {
+        text-align: center;
+    }
+</style>
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>한국배구연맹</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+
+<body>
+    <header>
+        <h1>한국배구연맹</h1>
+	</header>
+    <main>
+        <section class="team-intro">
+            <table>
+                <tr>
+                    <td><img src="~/image/666666666.png" alt="배구팀 이미지"></td>
+                    <td><img src="~/image/흥국.png" alt="배구팀 이미지"></td>
+                    <td><img src="~/image/현대 건설4.png" alt="배구팀 이미지" /></td>
+                    <td><img src="~/image/66777.png" alt="배구팀 이미지" /></td>
+                </tr>
+                <tr>
+                    <td><a href="@Url.Action("KoreanRoad", "Home")" class="team-name" style="color:red">한국도로공사</a></td>
+                    <td><a href="@Url.Action("Heungkuk", "Home")" class="team-name" style="color:purple">흥국생명</a></td>
+                    <td><a href="@Url.Action("Hyundai", "Home")" class="team-name" style="color:green">현대건설</a></td>
+                    <td><a href="@Url.Action("GS", "Home")" class="team-name" style="color:blue">GS칼텍스</a></td>
+                </tr>
+            </table>
+            <br />
+            <table>
+                <tr>
+                    <td><img src="~/image/444.jpg" alt="배구팀 이미지"></td>
+                    <td><img src="~/image/알토스.png" alt="배구팀 이미지"></td>
+                    <td><img src="~/image/마지막.png" alt="배구팀 이미지" /></td>
+                </tr>
+                <tr>
+                    <td><a href="@Url.Action("Peppers", "Home")" class="team-name" style="color: orange">페퍼저축은행</a></td>
+                    <td><a href="@Url.Action("Ibk", "Home")" class="team-name" style="color: skyblue">IBK기업은행</a></td>
+                    <td> <a href="@Url.Action("KGC", "Home")" class="team-name" style="color: black">KGC인삼공사</a></td>
+                </tr>
+            </table>
+        </section>
+    </main>
+    <footer>
+        <p>&copy; 2023 한국배구연맹. All rights reserved.</p>
+    </footer>
+</body>
+
+</html>
