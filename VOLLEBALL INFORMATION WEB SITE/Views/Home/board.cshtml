@@ -1,0 +1,110 @@
+﻿@model IEnumerable<Mini_Project2.Models.boards>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<section class="notice">
+    <div class="page-title">
+        <div class="container">
+            @{string team="";
+            bool allSame = true;
+            int? firstTeam = null;}
+            @foreach (var player in Model)
+            {
+                if (firstTeam == null)
+                {
+                firstTeam = player.Team;
+                }
+                else if (player.Team != firstTeam)
+                {
+                allSame = false;
+                break;
+                }
+            }
+
+            @if (allSame)
+            {
+            if (firstTeam == 1)
+            {
+            team = "인천 흥국생명 핑크스파이더스";
+            }
+            else if (firstTeam == 2)
+            {
+            team = "수원 현대건설 힐스테이트";
+            }
+            else if (firstTeam == 4)
+            {
+            team = "한국도로공사 하이패스 배구단";
+            }
+            else if (firstTeam == 5)
+            {
+            team = "KGC인삼공사 프로배구단";
+            }
+            else if (firstTeam == 6)
+            {
+            team = "GS 칼텍스 서울 Kixx";
+            }
+            else if (firstTeam == 7)
+            {
+            team = "IBK기업은행 알토스";
+            }
+            }
+            else
+            {
+            team = "전체";
+            }
+
+            <h3>@team 게시판</h3>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="~/css/Interface.css">
+    <!-- board seach area -->
+    <div id="board-search">
+        <div class="container">
+            <div class="search-window">
+                <form asp-action="Search" onsubmit="return search()">
+                    <div class="search-wrap">
+                        <label for="search" class="blind">공지사항 내용 검색</label>
+                        <input class="form-control" name="name" placeholder="검색어를 입력해주세요." value="">
+                        <button type="submit" class="btn btn-dark" name="name">검색</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="th-num">번호</th>
+                        <th scope="col" class="th-title">제목</th>
+                        <th scope="col" class="th-title">글쓴이</th>
+                        <th scope="col" class="th-date">등록일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var itemCount = 1;
+                    }
+                    @foreach (var board in Model)
+                    {
+                        <tr>
+                            <td>@itemCount</td>
+                            <th><a asp-action="Details" asp-route-id="@board.No">@board.Title</a></th>
+                            <td>@board.Name</td>
+                            <td>@board.Date.ToString("yyyy.MM.dd")</td>
+                        </tr>
+                        itemCount++;
+                    }
+                </tbody>
+            </table>
+            <div style="text-align: right;">
+                <br>
+                <a onclick="location.href='/Home/Write'" class="btn btn-dark" >글쓰기</a>
+            </div>
+        </div>
+    </div>
+</section>
