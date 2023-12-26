@@ -1,0 +1,293 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+<style>
+    .center-image {
+        text-align: center;
+    }
+
+        .center-image img {
+            display: inline-block;
+            margin: 0;
+        }
+
+    .news-image {
+        width: 20%;
+    }
+
+    .athlete-image {
+        width: 100%;
+    }
+
+    .image-container {
+        text-align: center;
+    }
+
+        .image-container img {
+            display: inline-block;
+            margin: 0;
+        }
+
+    .outer-margin {
+        margin: 0 10%;
+    }
+
+
+    .news-text {
+        font-weight: bold;
+        margin-top: 5px;
+        color: white;
+        text-decoration: underline;
+        font-size: 20px;
+        font-family: 'Arial', sans-serif;
+        position: relative;
+        display: inline-block;
+        padding: 5px 15px;
+        background-color: orange;
+        border-radius: 10px;
+        z-index: 1;
+        text-align: left;
+    }
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: orange;
+        z-index: -1;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100%;
+        background-color: orange;
+        z-index: -1;
+    }
+
+    .youtube_wrap .item_g a img {
+        width: 275px; /* 원하는 너비로 설정하세요 */
+        height: auto; /* 비율 유지를 위해 높이는 자동으로 조정됩니다 */
+    }
+
+    /* 그림과 그림 사이의 간격 설정 */
+    .youtube_wrap .item_g a {
+        margin-right: 20px; /* 원하는 간격으로 설정하세요 */
+    }
+
+    .social_wrap02 .news-text {
+        text-align: center;
+        margin: 0 auto;
+    }
+
+    .youtube_wrap .item_g {
+        display: flex;
+        justify-content: center;
+    }
+
+    .board-section {
+        background-color: orange;
+        padding: 20px;
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    }
+
+    .board-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: white;
+        margin: 0;
+        padding-bottom: 10px;
+    }
+
+    .board-button {
+        background-color: white;
+        color: orange;
+        border: none;
+        padding: 10px 20px;
+        font-size: 18px;
+        border-radius: 5px;
+        cursor: pointer;
+    }
+
+        .board-button:hover {
+            background-color: #0056b3;
+        }
+
+    .sliderBox {
+        border-top: 2px solid grey;
+        border-bottom: 2px solid grey;
+        display: flex;
+        justify-content: center;
+        height: 400px;
+    }
+
+    .slider {
+        width: 50%;
+        height: 100%
+    }
+
+        .slider img {
+            width: 100%;
+        }
+
+</style>
+
+<div class="center-image">
+    <div class="outer-margin"></div>
+    <a href="/home/clubinfo/8">
+    <img src="~/image/패퍼스 저축은행 로고.png" alt="패퍼스 저축은행 로고" />
+    </a>
+    <br/>
+    <hr style="border-color: pink;" />
+    <div class="outer-margin"></div>
+</div>
+
+<div class="image-container">
+    <div class="outer-margin"></div>
+    <div>
+        <a href="/home/list/8">
+        <p class="news-text">선수단 정보</p>
+            </a>
+        <hr style="border-color: pink;" />
+        <p><img src="~/image/패서스 선수단임.jpg" alt="패퍼스 저축은행 선수단" class="athlete-image" /></p>
+        <hr style="border-color: pink;" />
+        <a class="news-text" href="../home/AINews">뉴스 항목</a>
+        <hr style="border-color: pink;" />
+    </div>
+    <div class="wrap">
+        <div class="sliderBox">
+            <section id="slider" class="slider">
+                <img src="~/image/패퍼스 뉴스1.jpg" alt="뉴스" class="news-image" />
+                <img src="~/image/패퍼스 뉴스2.jpg" alt="뉴스2" class="news-image" />
+                <img src="~/image/패퍼스 뉴스3.jpg" alt="뉴스3" class="news-image" />
+                <img src="~/image/패퍼스 뉴스5.jpg" alt="뉴스4" class="news-image" />
+            </section>
+        </div>
+    </div>
+                <hr style="border-color: pink;" />
+</div>
+
+<div class="board-section">
+
+    <h2 class="board-title">패퍼스 저축은행의 팬 게시판입니다. 소중한 의견을 작성해주세요.</h2>
+    <a class="board-button" href="../Home/board/8">새 글 작성</a>
+</div>
+<br />
+
+<section class="center-image">
+    <div id="sideFix2">
+        <hr style="border-color: pink;" />
+        <p class="news-text" text-align: center;>유튜브 컨텐츠</p>
+        <hr style="border-color: pink;" />
+        <div class="inner_wrap tab_wrap social_con">
+            <div class="tab_contents">
+                <div id="instagram" class="tab_con instagram_wrap">
+                    <ul class="row_group" id="instafeed">
+                    </ul>
+                </div>
+
+                <div id="youtube" class="youtube_wrap tab_con on">
+                    <div class="">
+                        <div class="">
+                            <div class="item row_group col_2">
+                                <div class="col item_g">
+                                    <a href="https://www.youtube.com/watch?v=L-Kq2nvhGk4" target="_blank"><img src="~/image/패퍼스 유튜브1.png" alt=""></a>
+                                    <a href="https://www.youtube.com/watch?v=bKGXn50Jdy4" target="_blank"><img src="~/image/패퍼스 유튜브2.png" alt=""></a>
+                                    <a href="https://www.youtube.com/watch?v=kCnSyGOj9oc" target="_blank"><img src="~/image/패퍼스 유튜브3.png" alt=""></a>
+                                    <a href="https://www.youtube.com/watch?v=mzFiPuuCwLo" target="_blank"><img src="~/image/패퍼스 유튜브4.png" alt=""></a>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<script>
+    //------------------------------slide
+    function Slider(target, type) {
+        let index = 1;
+        let isMoved = true;
+        const speed = 1000;
+
+        const transform = "transform " + speed / 1000 + "s";
+        let translate = (i) => "translateX(-" + 100 * i + "%)";
+
+        const slider = document.querySelector(".slider");
+        const sliderRects = slider.getClientRects()[0];
+        slider.style["overflow"] = "hidden";
+
+        const container = document.createElement("div");
+        container.style["display"] = "flex";
+        container.style["width"] = sliderRects.width + "px";
+        container.style["height"] = sliderRects.height + "px";
+        container.style["transform"] = translate(index);
+
+        // 슬라이더 화면 목록
+        let boxes = [].slice.call(slider.children);
+        boxes = [].concat(boxes[boxes.length - 1], boxes, boxes[0]);
+
+        // 슬라이더 화면 스타일
+        const size = boxes.length;
+        for (let i = 0; i < size; i++) {
+            const box = boxes[i];
+            box.style["flex"] = "none";
+            box.style["flex-wrap"] = "wrap";
+            box.style["height"] = "100%";
+            box.style["width"] = "100%";
+            container.appendChild(box.cloneNode(true));
+        }
+
+        container.addEventListener("transitionstart", function () {
+            isMoved = false;
+            setTimeout(() => {
+                isMoved = true;
+            }, speed);
+        });
+        container.addEventListener("transitionend", function () {
+            // 처음으로 순간이동
+            if (index === size - 1) {
+                index = 1;
+                container.style["transition"] = "none";
+                container.style["transform"] = translate(index);
+            }
+        });
+
+        slider.innerHTML = "";
+        slider.appendChild(container);
+
+        return {
+            //   move: function (i) {
+            //     if (isMoved === true) {
+            //       index = i;
+            //       container.style["transition"] = transform;
+            //       container.style["transform"] = translate(index);
+            //     }
+            //   },
+            next: function () {
+                if (isMoved === true) {
+                    index = (index + 1) % size;
+                    container.style["transition"] = transform;
+                    container.style["transform"] = translate(index);
+                }
+            }
+        };
+    }
+
+    const s1 = new Slider("#slider1", "H");
+
+    setInterval(() => {
+        s1.next();
+    }, 2500)
+</script>
