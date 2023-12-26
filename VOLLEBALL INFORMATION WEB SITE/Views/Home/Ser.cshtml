@@ -1,0 +1,108 @@
+﻿@{
+    ViewData["Title"] = "Ser";
+}
+
+<style>
+    .board-section {
+        background-color: skyblue;
+        padding: 40px; /* 패딩을 더 크게 조정 */
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto; /* 위 아래 여백 추가, 가로 가운데 정렬 */
+        width: 70%; /* 너비를 더 크게 조정 */
+    }
+
+    .board-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: skyblue;
+        margin: 0;
+        padding-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        padding: 15px;
+        font-size: 18px;
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 30px;
+    }
+
+    .back-button {
+        text-align: right;
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+
+    .board-button {
+        background-color: white;
+        color: blue;
+        border: none;
+        padding: 15px 30px;
+        font-size: 24px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+        .board-button:hover {
+            background-color: #0056b3;
+        }
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: skyblue;
+        z-index: -1;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100%;
+        background-color: skyblue;
+        z-index: -1;
+    }
+
+    .centered-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+</style>
+<div class="centered-text">
+    <h1 class="board-title">선수 찾기</h1>
+    <img src="https://img.lb.inews24.com/image_joy/202008/facebookexternalhit/face/626x352/1453708418929_2_200807.jpg" alt="선수 이미지" />
+
+    <div class="board-section">
+        <form asp-action="serplayer" onsubmit="return searchPlayer()">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <div class="form-group" style="margin-bottom: 20px;">
+                <!-- 여백 추가 -->
+                <input class="form-control" name="name" id="searchInput" />
+            </div>
+            <div class="form-group">
+                <input type="submit" value="찾기" class="btn btn-primary board-button" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="script.js"></script>
