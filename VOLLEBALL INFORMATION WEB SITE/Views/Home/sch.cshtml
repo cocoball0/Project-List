@@ -1,0 +1,532 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+
+<!--<div>
+	<a href="javascript:;" onClick="window.open('popup_game_02.html', 'pop_game', 'width=750, height=800, scrollbars=yes');" class="btn btn_lst wrp_rounded w80 btn_grey_border" style="z-index:100; position:absolute; top:565px; right:181px; height:24px; line-height:30px; font-size:12px;"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>경기요약</a>
+</div>-->
+<!--//임시 2015.10.10-->
+<!-- 게시물 리스트 -->
+		<style>
+			.game-cell {
+				width: 200px; /* 적절한 너비 설정 */
+				white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+				overflow: hidden; /* 너무 긴 텍스트는 숨기기 */
+				text-overflow: ellipsis; /* 너무 긴 텍스트는 ...으로 표시 */
+			}
+			/* 표 전체 스타일링 */
+			.lst_schedule {
+				width: 100%;
+				border-collapse: collapse;
+				margin-bottom: 20px;
+			}
+				/* 캡션 스타일링 */
+				.lst_schedule caption {
+					font-weight: bold;
+					margin-bottom: 10px;
+				}
+
+				/* 헤더 셀 스타일링 */
+				.lst_schedule th {
+					background-color: #f2f2f2;
+					border: 1px solid #ddd;
+					text-align: center;
+					padding: 8px;
+				}
+
+				/* 데이터 셀 스타일링 */
+				.lst_schedule td {
+					border: 1px solid #ddd;
+					text-align: center;
+					padding: 8px;
+				}
+				.date{
+					color:navy;
+				}
+			/* 경기 셀 스타일링 */
+			.game-cell {
+				white-space: nowrap;
+				overflow: hidden;
+				text-overflow: ellipsis;
+			}
+
+			h4 {
+				border: 1px solid #ddd; /* 테두리 스타일 설정 */
+				background-color: #808080; /* 배경색 설정 */
+				color: #fff; /* 텍스트 색상 설정 (진한 회색) */
+				padding: 8px;
+			}
+			
+		</style>
+@{
+	ViewData["Title"] = "Chart";
+}
+
+<h1 style="text-align:center;">역대 순위</h1>
+<br />
+<br />
+<canvas id="myChart"></canvas>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.0/dist/chart.min.js"></script>
+<script>
+	const DATA_COUNT = 6;
+	const NUMBER_CFG = { count: DATA_COUNT, min: -100, max: 100 };
+
+	const labels = ['도드람 2017-2018 V-리그', '도드람 2018-2019 V-리그', '도드람 2019-2020 V-리그', '도드람 2020-2021 V-리그', '도드람 2021-2022 V-리그', '도드람 2022-2023 V-리그'];
+	const data = {
+		labels: labels,
+		datasets: [
+			{
+				label: '흥국생명 핑크스파이더스',
+				data: [6, 1, 3, 2, 6, 1],
+				borderColor: 'red',
+				backgroundColor: 'rgba(255, 0, 0, 0.5)',
+				yAxisID: 'y',
+			},
+			{
+				label: '현대건설 힐스테이트',
+				data: [3, 5, 1, 6, 1, 2],
+				borderColor: 'blue',
+				backgroundColor: 'rgba(0, 0, 255, 0.5)',
+				yAxisID: 'y',
+			},
+			{
+				label: '한국도로공사 하이패스 배구단',
+				data: [1, 2, 6, 4, 2, 3],
+				borderColor: 'green',
+				backgroundColor: 'rgba(0, 255, 0, 0.5)',
+				yAxisID: 'y',
+			},
+			{
+				label: 'KGC인삼공사 프로배구단',
+				data: [5, 6, 4, 5, 4, 4],
+				borderColor: 'orange',
+				backgroundColor: 'rgba(255, 165, 0, 0.5)',
+				yAxisID: 'y',
+			},
+			{
+				label: 'GS 칼텍스 KIXX',
+				data: [4, 3, 2, 1, 3, 5],
+				borderColor: 'purple',
+				backgroundColor: 'rgba(128, 0, 128, 0.5)',
+				yAxisID: 'y',
+			},
+			{
+				label: 'IBK 기업은행 알토스',
+				data: [2, 4, 5, 3, 5, 6],
+				borderColor: 'cyan',
+				backgroundColor: 'rgba(0, 255, 255, 0.5)',
+				yAxisID: 'y',
+			},
+			{
+				label: '페퍼저축은행 AI 페퍼스',
+				data: [null, null, null, 7, 7, 7],
+				borderColor: 'pink',
+				backgroundColor: 'rgba(255, 182, 193, 0.5)',
+				yAxisID: 'y',
+			}
+		]
+	};
+
+	const ctx = document.getElementById('myChart').getContext('2d');
+	const myChart = new Chart(ctx, {
+		type: 'line',
+		data: data,
+		options: {
+			scales: {
+				y: {
+					beginAtZero: true,
+					reverse: true,
+				}
+			}
+		}
+	});
+</script>
+<br />
+<br />
+<h4>도드람2023-2024 V-리그 여자배구</h4>
+<div class="wrp_lst">
+	<table class="lst_board lst_schedule">
+		@* <caption>일정 안내 표로 첫 번째 열은 날짜, 두 번째 열은 순번, 세 번째 열은 구분, 네 번째 열은 경기, 다섯 번째 열은 시간, 여섯 번째 열은 구장, 일곱 번째 열은 중계, 여덞 번째 열은 라운드 아홉 번째 열은 비고로 구성됩니다.</caption> *@
+		<colgroup>
+			<col style="width:90px" />
+			<col style="width:39px" />
+			<col style="width:39px" />
+			<col style="width:86px" />
+			<col style="width:81px" />
+			<col style="width:51px" />
+			<col style="width:99px" />
+			<col style="width:89px" />
+			<col style="width:109px" />
+			<col />
+		</colgroup>
+		<thead>
+			<tr>
+				<th scope="col" class="date">날짜</th>
+				<th scope="col">순번</th>
+				<th scope="col">구분</th>
+				<th scope="col" colspan="2">경기</th>
+				<th scope="col">시간</th>
+				<th scope="col">구장</th>
+				<th scope="col">생중계</th>
+				<th scope="col">라운드</th>
+				<th scope="col">비고</th>
+			</tr>
+		</thead>
+		<tbody>
+
+			<tr class="end">
+				<td class="date">10. 14 (토)</td>
+				<td>02</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">한국도로공사@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell" >@* &nbsp;&nbsp;&nbsp;&nbsp; *@흥국생명</td>
+
+				<td>16:00</td>
+				<td>김천실내</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/hipass" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+					
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 15 (일)</td>
+				<td>04</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">현대건설@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@페퍼저축은행</td>
+
+				<td>16:00</td>
+				<td>수원</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/hillstate" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end ">
+				<td class="date">10. 16 (월)</td>
+				<td>&nbsp;</td>
+				<td colspan="8" class="left">경기가 없습니다.</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 17 (화)</td>
+				<td> 06</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">KGC인삼공사@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@IBK기업은행</td>
+
+				<td>19:00</td>
+				<td>대전충무</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/kgc" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 18 (수)</td>
+				<td>08</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">현대건설@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@흥국생명</td>
+
+				<td>19:00</td>
+				<td>수원</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/hillstate" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 19 (목)</td>
+				<td>10</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">페퍼저축은행@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@한국도로공사</td>
+
+				<td>19:00</td>
+				<td>페퍼스타디움</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+
+					<!--<a href="https://www.vticket.co.kr/aipeppers" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 20 (금)</td>
+				<td>12</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">GS칼텍스@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@KGC인삼공사</td>
+
+				<td>19:00</td>
+				<td>서울장충</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/Kixx" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 21 (토)</td>
+				<td>14</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">IBK기업은행@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@현대건설</td>
+
+				<td>16:00</td>
+				<td>화성종합실내</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/altos" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 22 (일)</td>
+				<td>16</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">흥국생명@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@페퍼저축은행</td>
+
+				<td>16:00</td>
+				<td>인천삼산월드</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/pinkspiders" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end ">
+				<td class="date">10. 23 (월)</td>
+				<td>&nbsp;</td>
+				<td colspan="8" class="left">경기가 없습니다.</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 24 (화)</td>
+				<td>18</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">IBK기업은행@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@GS칼텍스</td>
+
+				<td>19:00</td>
+				<td>화성종합실내</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/altos" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 25 (수)</td>
+				<td>20</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">현대건설@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@한국도로공사</td>
+
+				<td>19:00</td>
+				<td>수원</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/hillstate" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 26 (목)</td>
+				<td>22</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">흥국생명@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@KGC인삼공사</td>
+
+				<td>19:00</td>
+				<td>인천삼산월드</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/pinkspiders" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 27 (금)</td>
+				<td>24</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">페퍼저축은행@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@GS칼텍스</td>
+
+				<td>19:00</td>
+				<td>페퍼스타디움</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/aipeppers" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 28 (토)</td>
+				<td>26</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">한국도로공사@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@IBK기업은행</td>
+
+				<td>16:00</td>
+				<td>김천실내</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/hipass" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end">
+				<td class="date">10. 29 (일)</td>
+				<td>28</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">KGC인삼공사@* &nbsp;&nbsp;&nbsp; *@ </td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@현대건설</td>
+
+				<td>16:00</td>
+				<td>대전충무</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/kgc" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+			<tr class="end ">
+				<td class="date">10. 30 (월)</td>
+				<td>&nbsp;</td>
+				<td colspan="8" class="left">경기가 없습니다.</td>
+			</tr>
+
+			<tr class="endlast">
+				<td class="date">10. 31 (화)</td>
+				<td>30</td>
+				<td>여자</td>
+
+				<td class="tright" style="white-space: nowrap;">GS칼텍스@* &nbsp;&nbsp;&nbsp;  *@</td>
+				<td class="tleft game-cell">@* &nbsp;&nbsp;&nbsp;&nbsp; *@흥국생명</td>
+
+				<td>19:00</td>
+				<td>서울장충</td>
+
+				<td></td>
+
+				<td>V리그 1Round</td>
+
+				<td>
+					<a href="/Home/schdetail" class="btn btn_lst wrp_rounded w80 btn_grey_border"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span><button type="button" class="navyBtn" onClick="https://localhost:7013/">전력비교</a>
+					<!--<a href="https://www.vticket.co.kr/Kixx" target="_blank" class="btn btn_lst wrp_rounded w82 btn_blue"><span class="lt"></span><span class="lb"></span><span class="rt"></span><span class="rb"></span>티켓예매</a>-->
+
+				</td>
+			</tr>
+
+		</tbody>
+	</table>
+</div>
+<!-- //게시물 리스트 -->
+					</div>
+<!-- //type1: 리스트 -->
