@@ -1,0 +1,180 @@
+@model IEnumerable<Mini_Project2.Models.Player>
+@{
+    ViewData["Title"] = "Com";
+}
+
+<style>
+    .board-section {
+        background-color: skyblue;
+        padding: 40px; /* 패딩을 더 크게 조정 */
+        border-radius: 10px;
+        text-align: center;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        margin: 20px auto; /* 위 아래 여백 추가, 가로 가운데 정렬 */
+        width: 70%; /* 너비를 더 크게 조정 */
+    }
+
+    .board-title {
+        font-size: 32px;
+        font-weight: bold;
+        color: skyblue;
+        margin: 0;
+        padding-bottom: 20px;
+    }
+
+    .form-group {
+        margin-bottom: 20px;
+    }
+
+    .form-control {
+        padding: 15px;
+        font-size: 18px;
+        width: 100%;
+        border: 2px solid #ccc;
+        border-radius: 10px;
+    }
+
+    .text-danger {
+        color: red;
+        font-size: 30px;
+    }
+
+    .back-button {
+        text-align: right;
+        margin-right: 20px;
+        margin-top: 20px;
+    }
+
+    .board-button {
+        background-color: white;
+        color: blue;
+        border: none;
+        padding: 15px 30px;
+        font-size: 24px;
+        border-radius: 10px;
+        cursor: pointer;
+    }
+
+        .board-button:hover {
+            background-color: #0056b3;
+        }
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: skyblue;
+        z-index: -1;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100%;
+        background-color: skyblue;
+        z-index: -1;
+    }
+
+    .centered-text {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+</style>
+
+<div class="centered-text">
+    <h1 class="board-title">선수 비교 하기</h1>
+    <img src="https://img.freepik.com/premium-vector/female-sportsman-volleyball-player-in-motion-kicking-ball-over-white-background-vector-illustration-hobby_489646-23579.jpg" alt="선수 이미지" />
+
+    <div class="board-section">
+        <form asp-action="Complayer" method="post">
+            <select class="form-select" name="id1">
+                @foreach (var player in Model)
+                {
+                    @if (player.position != "DIR" && player.position != "COA")
+                    {
+                        string team;
+                        @if (player.team == 1)
+                        {
+                            team = "인천 흥국생명 핑크스파이더스";
+                        }
+                        else if (player.team == 2)
+                        {
+                            team = "수원 현대건설 힐스테이트";
+                        }
+                        else if (player.team == 4)
+                        {
+                            team = "한국도로공사 하이패스 배구단";
+                        }
+                        else if (player.team == 5)
+                        {
+                            team = "KGC인삼공사 프로배구단";
+                        }
+                        else if (player.team == 6)
+                        {
+                            team = "GS 칼텍스 서울 Kixx";
+                        }
+                        else if (player.team == 7)
+                        {
+                            team = "IBK기업은행 알토스";
+                        }
+                        else
+                        {
+
+                            team = "페퍼저축은행 AI PEPPERS";
+                        }
+                        <option value="@player.id">@team | @player.name</option>
+                    }
+                }
+            </select>
+            <br />
+            <select class="form-select" name="id2">
+                @foreach (var player in Model)
+                {
+                    @if (player.position != "DIR" && player.position != "COA")
+                    {
+                        string team;
+                        @if (player.team == 1)
+                        {
+                            team = "인천 흥국생명 핑크스파이더스";
+                        }
+                        else if (player.team == 2)
+                        {
+                            team = "수원 현대건설 힐스테이트";
+                        }
+                        else if (player.team == 4)
+                        {
+                            team = "한국도로공사 하이패스 배구단";
+                        }
+                        else if (player.team == 5)
+                        {
+                            team = "KGC인삼공사 프로배구단";
+                        }
+                        else if (player.team == 6)
+                        {
+                            team = "GS 칼텍스 서울 Kixx";
+                        }
+                        else if (player.team == 7)
+                        {
+                            team = "IBK기업은행 알토스";
+                        }
+                        else
+                        {
+
+                            team = "페퍼저축은행 AI PEPPERS";
+                        }
+                        <option value="@player.id">@team | @player.name</option>
+                    }
+                }
+            </select>
+            <br />
+            <input type="submit" class="btn btn-primary" value="비교하기" />
+        </form>
+    </div>
+</div>
