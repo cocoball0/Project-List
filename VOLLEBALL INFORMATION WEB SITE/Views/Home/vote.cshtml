@@ -1,0 +1,144 @@
+﻿@model IEnumerable<Player>
+<style>
+    h3,h2{
+        text-align:center;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.5.1/dist/chart.min.js"></script>
+
+<canvas id="myChart" width="400" height="200"></canvas>
+
+<script>
+    var Result = @Html.Raw(Json.Serialize(Model.Select(r => r.vote)));
+    var Title = @Html.Raw(Json.Serialize(Model.Select(r => r.name)));
+    const totalDuration = 50000;
+    const delayBetweenPoints = totalDuration / Title.length;
+    const previousY = (ctx) => ctx.index === 0 ? ctx.chart.scales.y.getPixelForValue(100) : ctx.chart.getDatasetMeta(ctx.datasetIndex).data[ctx.index - 1].getProps(['y'], true).y;
+    const animation = {
+        x: {
+            type: 'number',
+            easing: 'linear',
+            duration: delayBetweenPoints,
+            from: NaN, // the point is initially skipped
+            delay(ctx) {
+                if (ctx.type !== 'Title' || ctx.xStarted) {
+                    return 0;
+                }
+                ctx.xStarted = true;
+                return ctx.index * delayBetweenPoints;
+            }
+        },
+        y: {
+            type: 'number',
+            easing: 'linear',
+            duration: delayBetweenPoints,
+            from: previousY,
+            delay(ctx) {
+                if (ctx.type !== 'Title' || ctx.yStarted) {
+                    return 0;
+                }
+                ctx.yStarted = true;
+                return ctx.index * delayBetweenPoints;
+            }
+        }
+    };
+
+    var chartArea = document.getElementById('myChart').getContext('2d');
+    var myChart = new Chart(chartArea, {
+        type: 'bar',
+        data: {
+            labels: Title,
+            datasets: [{
+                label: '투표수',
+                data: Result, // Use the `Result` array here
+                backgroundColor: 'rgba(255, 99, 132, 0.2)',
+                borderColor: 'rgba(255, 99, 132, 1)',
+                borderWidth: 1
+            }]
+        },
+        options: {
+            animation,
+            interaction: {
+                intersect: false
+            },
+            plugins: {
+                legend: false
+            },
+            scales: {
+                y: {
+                    beginAtZero: true
+                }
+            }
+        }
+    });
+</script>
+<h3>Top 10 Players</h3>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Rank</th>
+            <th>이름</th>
+            <th>투표수</th>
+        </tr>
+    </thead>
+    <tbody>
+        @{int i=1;}
+        
+        @foreach (var player in Model)
+        {
+            if (i > 10) break;
+            <tr>
+                <td>@i</td>
+                <td>@player.name</td>
+                <td>@player.vote</td>
+            </tr>
+            i++;
+        }
+    </tbody>
+</table>
+
+<h3>당신의 선수에 투표하기</h3>
+<form asp-action="votein">
+    <div class="form-group">
+        <select class="form-control" id="playerId" name="id">
+            @foreach (var player in Model)
+            {
+                string team;
+                @if (player.team == 1)
+                {
+                    team = "인천 흥국생명 핑크스파이더스";
+                }
+                else if (player.team == 2)
+                {
+                    team = "수원 현대건설 힐스테이트";
+                }
+                else if (player.team == 4)
+                {
+                    team = "한국도로공사 하이패스 배구단";
+                }
+                else if (player.team == 5)
+                {
+                    team = "KGC인삼공사 프로배구단";
+                }
+                else if (player.team == 6)
+                {
+                    team = "GS 칼텍스 서울 Kixx";
+                }
+                else if (player.team == 7)
+                {
+                    team = "IBK기업은행 알토스";
+                }
+                else
+                {
+                    team = "페퍼저축은행 AI PEPPERS";
+                }
+                <option value="@player.id">@team | @player.name</option>
+
+            }
+        </select>
+    </div>
+    <br />
+    <div style="text-align:center;">
+        <button type="submit" class="btn btn-primary">투표하기</button>
+    </div>
+</form>
