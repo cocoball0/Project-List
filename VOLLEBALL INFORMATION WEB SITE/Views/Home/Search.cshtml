@@ -1,0 +1,46 @@
+﻿@model IEnumerable<Mini_Project2.Models.boards>
+
+@{
+    ViewData["Title"] = "Search";
+}
+
+<section class="notice">
+    <div class="page-title">
+        <div class="container">
+            <h3>검색 결과</h3>
+        </div>
+    </div>
+    <link rel="stylesheet" type="text/css" href="~/css/Interface.css">
+    <!-- board seach area -->
+
+    <!-- board list area -->
+    <div id="board-list">
+        <div class="container">
+            <table class="board-table">
+                <thead>
+                    <tr>
+                        <th scope="col" class="th-num">번호</th>
+                        <th scope="col" class="th-title">제목</th>
+                        <th scope="col" class="th-title">글쓴이</th>
+                        <th scope="col" class="th-date">등록일</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @{
+                        var itemCount = 1;
+                    }
+                    @foreach (var board in Model)
+                    {
+                        <tr>
+                            <td>@itemCount</td>
+                            <th><a asp-action="Details" asp-route-id="@board.No">@board.Title</a></th>
+                            <td>@board.Name</td>
+                            <td>@board.Date.ToString("yyyy.MM.dd")</td>
+                        </tr>
+                        itemCount++;
+                    }
+                </tbody>
+            </table>
+        </div>
+    </div>
+</section>
