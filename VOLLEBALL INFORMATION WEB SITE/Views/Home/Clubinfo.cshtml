@@ -1,0 +1,198 @@
+@model Club
+@{
+	ViewData["Title"] = "Home Page";
+}
+@* 5b5cd928df7936b44033141f7f51537b *@
+<style>
+	.conbox {
+		position: relative;
+		
+		border: 1px solid #e0e0e0;
+		border-radius: 3px;
+		background:white;
+	}
+
+	div {
+		display: block;
+	}
+
+	td, th, tr.conbox {
+		border: 1px solid black;
+	}
+
+	.name, .ename, .history, .coach, dl,h1, h4, ar {
+		text-align: center;
+	}
+
+	body {
+		color: rgb(118, 118, 118);
+		font: 14px / 1.5 NotoSansKr, Dotum, 돋움, Gulim, 굴림;
+		background: @Html.DisplayFor(model => model.backcol);
+	}
+
+	dl {
+		display: flex;
+		flex-wrap: wrap;
+		border:1px solid black
+	}
+
+	dt {
+		flex-basis: 12.5%;
+		text-align: center;
+		border: 1px solid black
+	}
+
+	dd {
+		flex-basis: 12.5%;
+		margin: 0;
+		border: 1px solid black
+	}
+
+	.em {
+		display: block;
+		margin: 0 auto;
+	}
+
+	.wrp_lst {
+		display: flex;
+		justify-content: center;
+	}
+	.history {
+		list-style: none;
+	}
+
+	body {
+		color: rgb(118, 118, 118);
+		font: 14px/1.5 NotoSansKr, Dotum, 돋움, Gulim, 굴림;
+		background: @Html.DisplayFor(model => model.backcol);
+		margin: 0;
+		padding: 0;
+	}
+
+	.container {
+		max-width: 800px;
+		margin: 0 auto;
+		padding: 20px;
+	}
+
+	.conbox {
+		border: 1px solid #e0e0e0;
+		border-radius: 3px;
+		background: white;
+		padding: 20px;
+	}
+
+	table {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	th, td {
+		border: 1px solid black;
+		padding: 8px;
+		text-align: center;
+	}
+
+	th {
+		background-color: #f2f2f2;
+	}
+
+	.team-logo {
+		max-width: 100px;
+		height: auto;
+		display: block;
+		margin: 0 auto;
+	}
+
+	.team-name {
+		font-size: 24px;
+		font-weight: bold;
+		margin-top: 20px;
+	}
+
+	.coach-info {
+		margin-top: 20px;
+	}
+
+	h4 {
+		font-size: 18px;
+		font-weight: bold;
+		margin-top: 20px;
+	}
+
+	#map {
+		width: 100%;
+		height: 350px;
+		margin-top: 20px;
+	}
+
+</style>
+<body>
+	<div class="container">
+		<article id="tab1" class="teaminfo mt30">
+			<div class="conbox">
+				<img src="@Html.DisplayFor(model => model.imgaddr)" alt="" class="team-logo" />
+				<h1 class="team-name">@Html.DisplayFor(model => model.Name_kor) | (@Html.DisplayFor(model => model.Name_eng))</h1>
+				<br />
+				<table>
+					<tr>
+						<th>정규리그 1위</th>
+						<td>@Html.DisplayFor(model => model.reg)회</td>
+					</tr>
+					<tr>
+						<th>챔프우승</th>
+						<td>@Html.DisplayFor(model => model.champ)회</td>
+					</tr>
+					<tr>
+						<th>통합우승</th>
+						<td>@Html.DisplayFor(model => model.total)회</td>
+					</tr>
+				</table>
+				<table class="coach-info">
+					<tr>
+						<th>감독</th>
+						<td>@Html.DisplayFor(model => model.dir)</td>
+					</tr>
+					<tr>
+						<th>코치</th>
+						<td>@Html.DisplayFor(model => model.coa)</td>
+					</tr>
+				</table>
+				<br />
+				<table class="home-stadium">
+					<tr>
+						<th>홈구장</th>
+					</tr>
+					<tr>
+						<td>
+							<div id="map"></div>
+						</td>
+					</tr>
+				</table>
+				<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=5b5cd928df7936b44033141f7f51537b"></script>
+				<script>
+					var locA = @Html.DisplayFor(model => model.locX);
+					var locB = @Html.DisplayFor(model => model.locY);
+					var mapContainer = document.getElementById('map');
+					var mapOption = {
+						center: new kakao.maps.LatLng(locA, locB),
+						level: 3
+					};
+					var map = new kakao.maps.Map(mapContainer, mapOption);
+					var markerPosition = new kakao.maps.LatLng(locA, locB);
+					var marker = new kakao.maps.Marker({
+						position: markerPosition
+					});
+					marker.setMap(map);
+					var iwContent = '<div style="padding:5px; text-align:center;">@Html.DisplayFor(model => model.gym_name)<br><a href="https://map.kakao.com/link/map/@Model.gym_name,@Model.locX,@Model.locY" style="color:blue" target="_blank">큰지도보기</a> <a href="https://map.kakao.com/link/to/@Model.gym_name,@Model.locX,@Model.locY" style="color:blue" target="_blank">길찾기</a></div>';
+					var iwPosition = new kakao.maps.LatLng(locA, locB);
+					var infowindow = new kakao.maps.InfoWindow({
+						position: iwPosition,
+						content: iwContent
+					});
+					infowindow.open(map, marker);
+				</script>
+			</div>
+		</article>
+	</div>
+</body>
