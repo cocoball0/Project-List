@@ -1,0 +1,132 @@
+@model IEnumerable<Mini_Project2.Models.Player>
+
+@{
+    ViewData["Title"] = "Complayer";
+}
+<style>
+    .container{
+        margin:0;
+    }
+</style>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@3.9.0/dist/chart.min.js"></script>
+<div style="display: flex;">
+@foreach (var player in Model)
+{
+     <div style="flex: 1; border-right:1px solid black;">
+        <h4>@player.name</h4>
+        <hr />
+        <div style="display: flex;">
+            <img src="@player.imgurl" />
+            <div style="width:500px; height:500px">
+                <canvas id="myChart-@player.id"></canvas>
+            </div>
+        </div>
+        <br />
+        <br />
+        <dl class="row">
+            <dt class="col-sm-2">
+                이름 :
+            </dt>
+            <dd class="col-sm-10">
+                @player.name
+            </dd>
+            <dt class="col-sm-2">
+                생년월일 :
+            </dt>
+            <dd class="col-sm-10">
+                @player.birth.ToString("yyyy년 MM월 dd일")
+            </dd>
+            <dt class="col-sm-2">
+                포지션 :
+            </dt>
+            <dd class="col-sm-10">
+                @player.position
+            </dd>
+            <dt class="col-sm-2">
+                키 :
+            </dt>
+            <dd class="col-sm-10">
+                @player.hei cm
+            </dd>
+            <dt class="col-sm-2">
+                몸무게 :
+            </dt>
+            <dd class="col-sm-10">
+                @player.wei kg
+            </dd>
+            <dt class="col-sm-2">
+                출신학교 :
+            </dt>
+            <dd class="col-sm-10">
+                @player.sch
+            </dd>
+            <dt class="col-sm-2">
+                전적 :
+            </dt>
+            <dd class="col-sm-10">
+                @player.record
+            </dd>
+        </dl>
+    </div>
+    <script>
+        var maxValues = [100, 1, 1, 1, 100, 10];
+        var data = [@player.att, @player.blo, @player.ser, @player.set, @player.res, @player.dig]
+        var normalizedData = data.map(function (value, index) {
+            return value / maxValues[index];
+        });
+        // 차트를 그럴 영역을 dom요소로 가져온다.
+        var chartArea = document.getElementById('myChart-@player.id').getContext('2d');
+        // 차트를 생성한다.
+        var myChart = new Chart(chartArea, {
+            // ①차트의 종류(String)
+            type: 'polarArea',
+            // ②차트의 데이터(Object)
+            data: {
+                // ③x축에 들어갈 이름들(Array)
+                labels: ['공격종합(성공률 %)', '블로킹Avg(set)', '서브Avg(set)', '세트Avg(set)', '리시브효율', '디그Avg(set)'],
+                // ④실제 차트에 표시할 데이터들(Array), dataset객체들을 담고 있다.
+                datasets: [{
+                    // ⑤dataset의 이름(String)
+                    label: '# of Votes',
+                    // ⑥dataset값(Array)
+                    data: normalizedData,
+                    // ⑦dataset의 배경색(rgba값을 String으로 표현)
+                    backgroundColor: [
+                        'rgba(255, 99, 132, 0.2)',
+                        'rgba(54, 162, 235, 0.2)',
+                        'rgba(255, 206, 86, 0.2)',
+                        'rgba(75, 192, 192, 0.2)',
+                        'rgba(153, 102, 255, 0.2)',
+                        'rgba(255, 159, 64, 0.2)'
+                    ],
+                    borderColor: [
+                        'rgba(255, 99, 132, 1)',
+                        'rgba(54, 162, 235, 1)',
+                        'rgba(255, 206, 86, 1)',
+                        'rgba(75, 192, 192, 1)',
+                        'rgba(153, 102, 255, 1)',
+                        'rgba(255, 159, 64, 1)'
+                    ],
+                    // dataset의 선 두께(Number)
+                    borderWidth: 1
+                }]
+            },
+            // 차트의 설정(Object)
+            options: {
+                responsive: true,
+                scales: {
+                    y: {
+                        beginAtZero: true,
+                        ticks: {
+                            callback: function (value) {
+                                return value;
+                            }
+                        }
+                    }
+                }
+            }
+        });
+    </script>
+
+}
+</div>
