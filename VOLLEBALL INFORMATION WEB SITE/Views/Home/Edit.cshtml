@@ -1,0 +1,82 @@
+@model boards
+<html>
+<head>
+    <meta charset='utf-8'>
+</head>
+
+<style>
+    table.table2 {
+        border-collapse: separate;
+        border-spacing: 1px;
+        text-align: left;
+        line-height: 1.5;
+        border-top: 1px solid #ccc;
+        margin: 20px 10px;
+    }
+        table.table2 tr {
+         
+            padding: 10px;
+            font-weight: bold;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+
+        table.table2 td {
+         
+            padding: 10px;
+            vertical-align: top;
+            border-bottom: 1px solid #ccc;
+        }
+
+        
+        table.table2 tr td:first-child {
+            white-space: nowrap; 
+            width: 1%; 
+        }
+
+    input[type="submit"][value="삭제"] {
+        background-color: red;
+        color: white; 
+        border: 1px solid red;
+    }
+
+</style>
+
+<body>
+    <form method="post" asp-action="Delete" asp-route-id="@Model.No">
+        <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+        <input type="hidden" asp-for="No" />
+        <table style="padding-top:50px" align=center width=700 border=0 cellpadding=2>
+            <tr>
+                <td height=20 align=center bgcolor=#ccc><font color=white> 글쓰기</font></td>
+            </tr>
+            <tr>
+                <td bgcolor=white>
+                    <table class="table2">
+                        <tr>
+                            <td>작성자</td>
+                            <td><input asp-for="Name" size=20 /> </td>
+                        </tr>
+
+                        <tr>
+                            <td>제목</td>
+                            <td><input asp-for="Title" size=60 /></td>
+                        </tr>
+
+                        <tr>
+                            <td>내용</td>
+                            <td><textarea asp-for="Detail" cols=85 rows=15></textarea></td>
+                        </tr>
+
+                    </table>
+                    <center>
+                        <input asp-for="Password" placeholder="비밀번호" size=10 maxlength=10 required />
+                        <input type="submit" value="수정" method="post" asp-action="Edit">
+                        <input type="submit" value="삭제" method="post">
+                    </center>
+                </td>
+            </tr>
+        </table>
+    </form>
+</body>
+</html>
