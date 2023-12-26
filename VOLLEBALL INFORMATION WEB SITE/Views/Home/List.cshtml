@@ -1,0 +1,290 @@
+﻿@model Listview
+@{
+    ViewData["Title"] = "List";
+}
+<style>
+    ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        display: flex; /* 요소들을 가로로 나란히 배치  */
+    }
+
+    li {
+        flex: 1; /* 가로 공간을 동일하게 분할하여 배치 */
+        text-align: center; /* 텍스트 가운데 정렬 */
+        list-style: none;
+    }
+
+        li img {
+            max-width: 100%; /* 이미지를 가로 너비 100%로 크기 조절 */
+            height: auto; /* 세로 비율에 맞게 자동 조절 */
+        }
+
+    hr {
+        border: none;
+        height: 3px;
+        background-color: #000000;
+        border-top: 4px solid #000000;
+    }
+
+    .custom-hr {
+        border: none;
+        height: 3px;
+        background-color: #000000;
+    }
+
+    h3.header {
+        background-color: @Model.ClubData.backcol; /* 원하는 배경색 설정 */
+        color: white; /* 텍스트 색상 설정 (선택사항) */
+        padding: 10px; /* 헤더 주위의 여백 설정 (선택사항) */
+    }
+
+    div.image-frame {
+        border: 0.5px solid grey;
+        padding: 3px;
+        text-align: center;
+    }
+
+    h4 {
+        color: blue; /* 파란색 글자 색상 설정 */
+    }
+
+    body::before {
+        content: '';
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 200px;
+        height: 100%;
+        background-color: @Model.ClubData.backcol;
+        z-index: -1;
+    }
+
+    body::after {
+        content: '';
+        position: fixed;
+        top: 0;
+        right: 0;
+        width: 200px;
+        height: 100%;
+        background-color: @Model.ClubData.backcol;
+        z-index: -1;
+    }
+</style>
+
+<section id="wrp_content">
+    <div style="text-align: center;">
+        <img src=@Model.ClubData.imgaddr alt="" />
+
+        <div style="text-align: left;">
+            <br />
+            <h3 class="header">@Model.ClubData.Name_kor 팀원 소개 </h3>
+            <article id="tab2" class="lst_player mt20">
+                <br />
+                <h4 class="mt50">감독</h4>
+                <li class="custom-hr"></li>
+                <ul>
+                    @foreach (var item in Model.PlayerData)
+                    {
+                        if (item.position == "DIR")
+                        {
+                            <li>
+                                <div class="image-frame">
+                                    <img src=@item.smallimg alt="" />
+                                    <p> @item.name (@item.position)</p>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+                <hr />
+                <br />
+                <h4 class="mt50">코치</h4>
+                <li class="custom-hr"></li>
+                <ul>
+
+                    @foreach (var item in Model.PlayerData)
+                    {
+                        if (item.position == "COA")
+                        {
+                            <li>
+                                <div class="image-frame">
+                                    <img src=@item.smallimg alt="" />
+                                    <p>@item.name (@item.position)</p>
+                                </div>
+                            </li>
+                        }
+                    }
+                </ul>
+
+                <hr />
+                <br />
+                @* <h4 class="mt50">지원스태프</h4>
+                <li class="custom-hr"></li>
+                <ul>
+                <li>
+                <div class="image-frame">
+                <a href="21132_player_view.asp?p_code=0001849&t_code=2001&s_part=2"><img src="/images/트레이너 공윤덕.jpg" alt="" /></a>
+                <p>&nbsp;&nbsp;트레이너 공윤덕</p>
+                </li>
+                <li>
+                <div class="image-frame">
+                <a href="21132_player_view.asp?p_code=0001849&t_code=2001&s_part=2"><img src="/images/트레이너 성지현.jpg" alt="" /></a>
+                <p>&nbsp;&nbsp;트레이너 성지현</p>
+                </li>
+                <li>
+                <div class="image-frame">
+                <a href="21132_player_view.asp?p_code=0001849&t_code=2001&s_part=2"><img src="/images/트레이너 안준형.jpg" alt="" /></a>
+                <p>&nbsp;&nbsp;트레이너 안준형</p>
+                </li>
+                <li>
+                <div class="image-frame">
+                <a href="21132_player_view.asp?p_code=0001849&t_code=2001&s_part=2"><img src="/images/트레이너 정의.jpg" alt="" /></a>
+                <p>&nbsp;&nbsp;트레이너 정의</p>
+                </li>
+                <li>
+                <div class="image-frame">
+                <a href="21132_player_view.asp?p_code=0001849&t_code=2001&s_part=2"><img src="/images/전력분석 김경한.jpg" alt="" /></a>
+                <p>&nbsp;&nbsp;전력분석 김경한</p>
+                <li>
+                <div class="image-frame">
+                <a href="21132_player_view.asp?p_code=0001849&t_code=2001&s_part=2"><img src="/images/매니저 정효진.jpg" alt="" /></a>
+                <p>&nbsp;&nbsp;매니저 정효진</p>
+                </li>
+                </li>
+                </ul>
+
+                <hr />
+                <br /> *@
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mt50">아웃사이드 히터</h4>
+                        <hr class="custom-hr">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>선수</td>
+                                    @foreach (var item in Model.PlayerData)
+                                    {
+                                        if (item.position == "OH")
+                                        {
+                                            <td>
+                                                <div class="image-frame text-center">
+                                                    <a href="@Url.Action("State","Home",new{id=item.id})"><img src=@item.smallimg alt="" /></a>
+                                                    <p>NO.@item.backnum @item.name (@item.position)</p>
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 class="mt50">아포짓 스파이커</h4>
+                        <hr class="custom-hr">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>선수</td>
+                                    @foreach (var item in Model.PlayerData)
+                                    {
+                                        if (item.position == "OP")
+                                        {
+                                            <td>
+                                                <div class="image-frame text-center">
+                                                    <a href="@Url.Action("State","Home",new{id=item.id})"><img src=@item.smallimg alt="" /></a>
+                                                    <p>NO.@item.backnum @item.name (@item.position)</p>
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- 다른 포지션에 대한 테이블을 추가 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mt50">미들블로커</h4>
+                        <hr class="custom-hr">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>선수</td>
+                                    @foreach (var item in Model.PlayerData)
+                                    {
+                                        if (item.position == "MB")
+                                        {
+                                            <td>
+                                                <div class="image-frame text-center">
+                                                    <a href="@Url.Action("State","Home",new{id=item.id})"><img src=@item.smallimg alt="" /></a>
+                                                    <p>NO.@item.backnum @item.name (@item.position)</p>
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <h4 class="mt50">세터</h4>
+                        <hr class="custom-hr">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>선수</td>
+                                    @foreach (var item in Model.PlayerData)
+                                    {
+                                        if (item.position == "S")
+                                        {
+                                            <td>
+                                                <div class="image-frame text-center">
+                                                    <a href="@Url.Action("State","Home",new{id=item.id})"><img src=@item.smallimg alt="" /></a>
+                                                    <p>NO.@item.backnum @item.name (@item.position)</p>
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- 다른 포지션에 대한 테이블을 추가 -->
+                    </div>
+                </div>
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <h4 class="mt50">리베로</h4>
+                        <hr class="custom-hr">
+                        <table class="table table-bordered">
+                            <tbody>
+                                <tr>
+                                    <td>선수</td>
+                                    @foreach (var item in Model.PlayerData)
+                                    {
+                                        if (item.position == "L")
+                                        {
+                                            <td>
+                                                <div class="image-frame text-center">
+                                                    <a href="@Url.Action("State","Home",new{id=item.id})"><img src=@item.smallimg alt="" /></a>
+                                                    <p>NO.@item.backnum @item.name (@item.position)</p>
+                                                </div>
+                                            </td>
+                                        }
+                                    }
+                                </tr>
+                            </tbody>
+                        </table>
+
+                        <!-- 다른 포지션에 대한 테이블을 추가 -->
+                    </div>
+                </div>
+            </article>
+        </div>
+    </div>
+</section>
