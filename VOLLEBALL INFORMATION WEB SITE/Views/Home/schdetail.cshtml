@@ -1,0 +1,327 @@
+﻿
+@{
+    ViewData["Title"] = "Result";
+}
+
+<style>
+	.game-cell {
+		width: 200px; /* 적절한 너비 설정 */
+		white-space: nowrap; /* 텍스트 줄 바꿈 방지 */
+		overflow: hidden; /* 너무 긴 텍스트는 숨기기 */
+		text-overflow: ellipsis; /* 너무 긴 텍스트는 ...으로 표시 */
+	}
+
+
+
+	.image-frames img {
+		max-width: 80px; /* 원하는 크기로 조절하세요 */
+		max-height: 80px; /* 원하는 크기로 조절하세요 */
+	}
+	/* 표 전체 스타일링 */
+	.lst_schedule {
+		width: 100%;
+		border-collapse: collapse;
+		margin-bottom: 20px;
+	}
+		/* 캡션 스타일링 */
+		.lst_schedule caption {
+			font-weight: bold;
+			margin-bottom: 20px;
+		}
+
+		/* 헤더 셀 스타일링 */
+		.lst_schedule th {
+			background-color: #f2f2f2;
+			border: 1px solid #ddd;
+			text-align: center;
+			padding: 8px;
+		}
+
+		/* 데이터 셀 스타일링 */
+		.lst_schedule td {
+			border: 1px solid #ddd;
+			text-align: center;
+			padding: 8px;
+		}
+
+	h4 {
+		border: 1px solid #ddd; /* 테두리 스타일 설정 */
+		background-color: navy; /* 배경색 설정 */
+		color: #fff; /* 텍스트 색상 설정 (진한 회색) */
+		padding: 13px;
+	}
+
+	h3 {
+		border: 1px solid #ddd; /* 테두리 스타일 설정 */
+		background-color: #808080; /* 배경색 설정 */
+		color: #fff; /* 텍스트 색상 설정 (진한 회색) */
+		padding: 15px;
+	}
+
+
+	.date {
+		color: navy;
+	}
+	/* 경기 셀 스타일링 */
+	.game-cell {
+		white-space: nowrap;
+		overflow: hidden;
+		text-overflow: ellipsis;
+	}
+
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 0;
+		display: flex; /* 요소들을 가로로 나란히 배치  */
+	}
+
+	li {
+		flex: 1; /* 가로 공간을 동일하게 분할하여 배치 */
+		text-align: center; /* 텍스트 가운데 정렬 */
+		list-style: none
+	}
+
+	.wrp_lst table {
+		width: 200%;
+		max-width: 1300px;
+	}
+
+		.wrp_lst table tr {
+			height: 30px; /* 원하는 높이로 조정 */
+		}
+
+</style>
+
+<div class="wrapper">
+	<h4 class="sub_tit color1 mt60 fl_left">2023-2024 시즌 상대전적</h4>
+
+	<p class="lh34 ft13 color6 mt60 fl_right">※ 시즌 상대전적 : 대회 기준</p>
+</div>
+
+<!-- 시즌 상대전적 -->
+<div class="wrp_lst">
+	<div class="wrp_lst" style="float: left; width: 50%;">
+		<table class="lst_board lst_board2">
+			@* 							<caption>시즌 상대전적 안내 표로 첫 번째 열은 경기 NO., 두 번째 열은 경기일자, 세 번째 열은 상대팀, 네 번째 열은 세트스코어, 다섯 번째 열은 득점, 여섯 번째 열은 실점, 일곱 번째 열은 경기시간, 여덞 번쨰 열은 승패를 나타냅니다.</caption>
+			*@
+			<colgroup>
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+			</colgroup>
+			<thead>
+				<tr style="background-color:#999999; color:#fff" ;>
+					<th scope="col">&nbsp;&nbsp;경기 &nbsp;&nbsp;</th>
+					<th scope="col">&nbsp;&nbsp;경기일자&nbsp;&nbsp;</th>
+					<th scope="col">&nbsp;&nbsp;상대팀&nbsp;&nbsp;</th>
+					<th scope="col">&nbsp;&nbsp;세트스코어&nbsp;&nbsp;</th>
+					<th scope="col">&nbsp;&nbsp;득점&nbsp;&nbsp;</th>
+					<th scope="col">&nbsp;&nbsp;실점&nbsp;&nbsp;</th>
+					<th scope="col">&nbsp;&nbsp;경기시간&nbsp;&nbsp;</th>
+					<th scope="col">&nbsp;&nbsp;승패&nbsp;&nbsp;</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr class='last'><td colspan='8' style='height:40px;text-align:left;'>시즌 상대전적이 없습니다.</td>
+					</tr>
+			</tbody>
+		</table>
+	</div>
+	<!-- //시즌 상대전적 -->
+	<div class="wrapper">
+		<h3 class="sub_tit color1 mt60 fl_left">&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h3>
+		<p class="lh34 ft13 color6 mt60 fl_right">※ 기록비교 : 정규리그 기준</p>
+
+	</div>
+	<div style="text-align:center; margin: 0 auto;">
+		<table class="lst_board lst_board2" style="width: 100%; max-width: 1300px;">
+			@* <caption>기록비교 안내 표 입니다.</caption> *@
+
+
+			<colgroup>
+				<col />
+				<col />
+				<col />
+				<col />
+				<col />
+			</colgroup>
+			<thead>
+				<tr class="match">
+					<li class="custom-hr"></li>
+					
+					<ul>
+						<li>
+							<div class="image-frame" >
+								<img src="data:image/png;base64,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" />
+								<div class="buttons-container"; >
+									<button class >기준팀</button>
+								</div>
+
+								@* <div class="border border-success p-2 mb-2">기준팀</div> *@
+								</div>
+						</li>
+
+						<li>
+							<br />
+							<br />
+							<div class="image-frames">
+								<img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRuucACxypSPYiKS7MMiH4Hs3hn-f3YW_nFVSSUTiTgOf8bRuDaDJn4yLO6keCMWIFosyE&usqp=CAU" />
+						</li>
+
+						<li>
+							<div class="image-frame">
+								<img src="data:image/png;base64,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" />
+								<div class="buttons-container">
+									<button>상대팀</button>
+								</div>
+
+
+
+						</li>
+
+						@* 	<div class="team-container">
+						<div style="text-align: center;">
+						<div class="team-info">
+						<img src="~/imagess/xla1.png" alt="팀 로고"class="team-logo"/> *@
+						@* <th colspan="2" scope="col">한국도로공사</th> *@
+						@* <div class="team-name">한국도로공사</div>
+						<th scope="col"><span class="txt_sub"></span></th>
+						<div class="team-info">
+						<img src="~/imagess/xla2.png" alt="팀 로고" class="team-logo" />
+						<div class="team-name">흥국생명</div> *@
+						@* <th colspan="2" scope="col">흥국생명</th> *@
+						<br />
+						<!-- 기록비교 -->
+						@* 				<div class="wrapper">
+						<h4 class="sub_tit color1 mt60 fl_left">시즌 상대전적</h4>
+						<p class="lh34 ft13 color6 mt60 fl_right">※ 시즌 상대전적 : 대회 기준</p>
+						</div>
+						*@
+
+				</tr>
+				<tr style="background-color:#808080; color:#fff" ;>
+					<th scope="col">시즌평균</th>
+					<th scope="col">Vs 상대</th>
+					<th scope="col" class="sort">구분</th>
+					<th scope="col">Vs 상대</th>
+					<th scope="col">시즌평균</th>
+				</tr>
+			</thead>
+			<tbody>
+
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">득점</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">공격</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">오픈공격</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">시간차공격</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">이동공격</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">후위공격</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">속공</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">퀵오픈</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td></td>
+					<td class="sort">서브</td>
+					<td></td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td></td>
+					<td class="sort">블로킹</td>
+					<td></td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td></td>
+					<td class="sort">디그</td>
+					<td></td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td></td>
+					<td class="sort">세트</td>
+					<td></td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td></td>
+					<td class="sort">리시브</td>
+					<td></td>
+					<td>-</td>
+				</tr>
+				<tr>
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">벌칙</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+				<tr class="last">
+					<td>-</td>
+					<td>-</td>
+					<td class="sort">범실</td>
+					<td>-</td>
+					<td>-</td>
+				</tr>
+
+			</tbody>
+		</table>
+	</div>
+	<!-- //기록비교 -->
