@@ -1,0 +1,107 @@
+﻿@model List<NewsItem>
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<html>
+<head>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-image: url('/Image/newsback.png'); /* 배경 이미지 경로 지정 */
+            background-size: cover; /* 배경 이미지를 화면 크기에 맞게 확장 */
+            background-position: center; /* 배경 이미지 중앙 정렬 */
+            background-repeat: no-repeat; /* 배경 이미지 반복 없음 */
+          
+        }
+
+        /* 전체 컨테이너 스타일 */
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        /*    background-color: rgba(255, 255, 255, 0.9); /* 흰색 배경에 투명도 추가 (0.9는 투명도 수준) */
+          /*  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* 그림자 효과 추가 */
+        }
+
+        /* 뉴스 항목 스타일 */
+        .news-list {
+            list-style-type: none;
+            padding: 0;
+        }
+
+        .news-item {
+            display: flex;
+            align-items: center;
+            border: 2px solid white;
+            background-color: #000080;
+            box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+            padding: 20px;
+            border-radius: 10px; /* 모서리를 둥글게 만드는 부분 */
+            background: linear-gradient(to bottom, #000080, #ffffff); /* 그라데이션 추가 */
+            background-size: 100% 330%; /* 그라데이션 위치 조절 */
+            position: relative; /* 위치 지정을 위해 부모 요소로부터 상대적인 위치 설정 */
+        }
+ 
+            .news-item img {
+                width: 130px;
+                height: 130px;
+                margin-right: 20px;
+            }
+
+            .news-item a {
+                text-decoration: none;
+                font-size: 23px;
+                color: white;
+                font-weight: bold;
+                font-family: "나눔바른고딕", sans-serif; /* 글꼴 변경 */
+                text-align: center; /* 텍스트 가운데 정렬 추가 */
+                margin: 0 auto; /* 좌우 가운데 정렬을 위한 margin 설정 */
+               
+            }
+
+        /* 타이틀 스타일 */
+        .news-title {
+            text-align: center;
+            font-size: 50px;
+            font-weight: bold;
+            margin-bottom: 40px;
+            font-family: "Georgia", serif;
+            color: white;
+            text-decoration: underline;
+
+        }
+
+        /* 페이지네이션 스타일 */
+        .pagination {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+            .pagination a {
+                text-decoration: none;
+                font-size: 18px;
+                color: #333;
+                margin: 0 10px;
+                font-weight: bold;
+            }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1 class="news-title">구 단  뉴 스</h1>
+        <ul class="news-list">
+            @for (int i = 0; i < Model.Count; i++)
+            {
+                <li class="news-item">
+                    <img src="@Model[i].ImageUrl" alt="News Image">
+                    <a href="@Model[i].Url">@Model[i].Title</a>
+                </li>
+            }
+        </ul>  
+    </div>
+</body>
+</html>
